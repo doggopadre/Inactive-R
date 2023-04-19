@@ -1,7 +1,7 @@
 import csv
 
-from github import Github
 from datetime import datetime
+from github import Github
 
 
 class OutdatedRepos:
