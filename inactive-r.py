@@ -28,7 +28,7 @@ class OutdatedRepos:
                 repo_details["Years"] = years
                 repo_details["Months"] = months
                 repo_details["Days"] = days
-
+                
                 self.outdated_repos.append(repo_details)
 
                 print(colored(f"[+]{repo.full_name}: Last Push Was --> [ {years} years, {months} months, and {days} days ago {repo_details['Language']} ]"
