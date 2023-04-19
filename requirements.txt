@@ -1,3 +1,4 @@
 pygithub
 github
 datetime
+termcolor
