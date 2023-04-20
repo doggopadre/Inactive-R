@@ -31,13 +31,13 @@ class OutdatedRepos:
                 
                 self.outdated_repos.append(repo_details)
 
-                print(colored(f"[+]{repo.full_name}: Last Push Was --> [ {years} years, {months} months, and {days} days ago {repo_details['Language']} ]"
-                ), "yellow")
-        print(colored(f"\n\n[++] A Total of {len(self.outdated_repos)} repos had their last push at least 2 year ago to date {self.current_date} [++]"
-        ), "yellow")
+                print(colored(f"[+] {repo.full_name}: Last Push Was --> [ {years} years, {months} months, and {days} days ago {repo_details['Language']} ]", 'yellow'
+                ))
+        print(colored(f"\n\n[++] A Total of {len(self.outdated_repos)} repos had their last push at least 2 year ago to date {self.current_date} [++]", 'red'
+        ))
 
     def save_as_csv(self):
-        with open("inactvie_repos.csv", mode="w", newline="") as file:
+        with open("inactive_repos.csv", mode="w", newline="") as file:
             fieldnames = [
                 "Name",
                 "Desc",
@@ -54,8 +54,8 @@ class OutdatedRepos:
             for repo in self.outdated_repos:
                 writer.writerow(repo)
         print(colored(
-            f"\n\n[+++] Finished writing results to CSV file > outdated_repos.csv [+++]"
-        ), "green")
+            f"\n\n[+++] Finished writing results to CSV file > outdated_repos.csv [+++]", 'green'
+        ))
 
     if __name__ == "__main__":
 
