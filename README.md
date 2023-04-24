@@ -26,13 +26,13 @@ pip3 install -r requirements.txt
 ```
 
 
-* Configure the GitHub API KEY and the Organisation Name in the script -> ***inactive-r.py*** . 
+* Configure the GitHub API KEY and the Organisation Name by exporting them as environment variables. 
 
 **Note**: Make sure that the **API KEY has Organisation Admin Permissions**
 
 ```
-self.g = Github("API_TOKEN_HERE")
-self.org = self.g.get_organization("ORGANIZATION_NAME_HERE")
+$ export API_KEY = "API_Key_Here"
+$ export ORGANIZATION_NAME = "Org_Name_Here"
 ```
  
  
