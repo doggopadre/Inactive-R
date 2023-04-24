@@ -1,12 +1,15 @@
 import csv
+import os
 from datetime import datetime
+
 from github import Github
 from termcolor import colored
 
+
 class OutdatedRepos:
     def __init__(self):
-        self.g = Github("API_KEY_HERE")
-        self.org = self.g.get_organization("ORGANISATION_NAME_HERE")
+        self.g = Github(os.environ.get("API_KEY"))
+        self.org = self.g.get_organization(os.environ.get("ORGANIZATION_NAME"))
         self.repos = self.org.get_repos()
         self.current_date = datetime.now()
         self.outdated_repos = []
@@ -28,13 +31,21 @@ class OutdatedRepos:
                 repo_details["Years"] = years
                 repo_details["Months"] = months
                 repo_details["Days"] = days
-                
+
                 self.outdated_repos.append(repo_details)
 
-                print(colored(f"[+] {repo.full_name}: Last Push Was --> [ {years} years, {months} months, and {days} days ago {repo_details['Language']} ]", 'yellow'
-                ))
-        print(colored(f"\n\n[++] A Total of {len(self.outdated_repos)} repos had their last push at least 2 year ago to date {self.current_date} [++]", 'red'
-        ))
+                print(
+                    colored(
+                        f"[+] {repo.full_name}: Last Push Was --> [ {years} years, {months} months, and {days} days ago {repo_details['Language']} ]",
+                        "yellow",
+                    )
+                )
+        print(
+            colored(
+                f"\n\n[++] A Total of {len(self.outdated_repos)} repos had their last push at least 2 year ago to date {self.current_date} [++]",
+                "red",
+            )
+        )
 
     def save_as_csv(self):
         with open("inactive_repos.csv", mode="w", newline="") as file:
@@ -53,16 +64,19 @@ class OutdatedRepos:
 
             for repo in self.outdated_repos:
                 writer.writerow(repo)
-        print(colored(
-            f"\n\n[+++] Finished writing results to CSV file > outdated_repos.csv [+++]", 'green'
-        ))
-
-    if __name__ == "__main__":
-
-        def main(self):
-            self.get_repo_data()
-            self.save_as_csv()
+        print(
+            colored(
+                f"\n\n[+++] Finished writing results to CSV file > outdated_repos.csv [+++]",
+                "green",
+            )
+        )
 
 
-reposcan = OutdatedRepos()
-reposcan.main()
+def main():
+    reposcan = OutdatedRepos()
+    reposcan.get_repo_data()
+    reposcan.save_as_csv()
+
+
+if __name__ == "__main__":
+    main()
